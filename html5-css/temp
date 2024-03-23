@@ -1,0 +1,35 @@
+#!/usr/bin/env python3
+
+import random
+import os
+
+pc = random.randint(0, 2)
+pc_out = 'ciao'
+if pc == 0:
+  pc_out = 'carta'
+elif pc == 1:
+  pc_outout = 'sasso'
+elif pc == 2:
+  pc_out = 'forbice'
+
+
+out = 0
+io = input('scegli tra carta, sasso, forbice => ')
+if io == 'carta':
+  out = 0
+elif io == 'sasso':
+  out = 1
+elif io == 'forbice':
+  out = 2
+
+
+print(f'pc => {pc_out}, io => {out}')
+print(f'{pc_out}, {io}')
+
+
+if io == pc:
+  print('TIE')
+elif out == ((pc + 1) % 3):
+  print('LUCKY BOY')
+else:
+  print('L')

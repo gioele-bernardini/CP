@@ -1,0 +1,6 @@
+per ottenere font personalizzati da inserire nelle pagine?
+
+copio il link tale e quale nella <head> section
+del file hdml
+
+e poi cambiamo il nome della font-family :)

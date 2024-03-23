@@ -1,0 +1,88 @@
+var per dichiarare una nuova variabile
+var value = 42;
+value = 42;
+
+cosa cambia?
+
+NON ci sono char type!
+un char e' una stringa di lunghezza 1 ;)
+
+
+
+coercien and === operator
+typeof operator
+
+undefined vs null value
+undefined e' una variabile NON inizializzata
+
+
+
+
+
+
+core di javascript
+gli object
+
+var myObj = {};
+myObj.prop = 'hello';
+var myObj {
+  "prop1": "ciao"
+  "prop2": 10
+}
+
+
+non ci sono attributi o metodi private: tutto visibile da tutti!
+e se accedo a una prooprieta (NO UN OBJECT) che non esiste?
+==> da' undefined!
+
+
+nomeProprieta = "prop1"
+console.log(oggetto[nomeProprieta])
+rende il codice piu' flessibile
+
+
+interpolation e stringhe fatte da '' o da  (fatto precedentemente)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var myObj = {
+  "prop": "hello",
+  "prop1": 123,
+  "prop2": true,
+
+  "objProp": {
+    "innerProp": "Inner property",
+  },
+}
+
+var propertyName = "prop1";
+console.log(myObj[propertyName])
+console.log(myObj.objProp.innerProp);
+
+
+
+POSSO ANCHE CREARE NUOVE PROPRIETA'!
+myObj.objProp.newInner = "new inner value";
+console.log(myObj)
+dot operatore e squared brackets operators possono essere mischiati
+
+
+
+
+
