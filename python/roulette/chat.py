@@ -11,15 +11,16 @@ from selenium.webdriver.common.keys import Keys
 
 
 def bye_bye():
-  username = 'tocav10931'
+  username = 'test_aurelio'
   # password = open('password.txt', 'r').read().strip()
-  password = 'balenciaga10'
+  password = 'ciaociao10!'
+
   base_url = 'https://instagram.com'
-  target = 'patrick_perini'
-  message = 'eeeeeeeeeeeehhhhhhhhhhhhhh l`e` ben carina vecio'
+  target = 'gioele.bernardini'
+  message = '[headless is OK]'
   # INIZIALIZZA CONNESSIONE!!!
   chrome_options = Options()
-  # chrome_options.add_argument("--headless")
+  chrome_options.add_argument("--headless")
 
   driver = webdriver.Chrome(options=chrome_options)
 

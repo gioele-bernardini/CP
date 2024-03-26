@@ -10,9 +10,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 
 # Credenziali per il login
-username = 'tocav10931'
-# password = open('password.txt', 'r').read().strip()
-password = 'balenciaga10'
+username = 'gioele.bernardini' # 'tocav10931'
+password = open('password.txt', 'r').read().strip()
+# password = 'balenciaga10'
 base_url = 'https://instagram.com'
 target = 'patrick_perini'
 message = 'NO CAPPIN`'

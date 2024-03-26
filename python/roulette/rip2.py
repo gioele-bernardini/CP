@@ -7,7 +7,6 @@ import argparse
 
 import chat
 
-
 LIST = ['sasso', 'carta', 'forbice']
 
 def winner(usr, pc):
@@ -27,9 +26,9 @@ def main():
   parser.add_argument('--no-pussy', action='store_true', help='Start the game')
   args = parser.parse_args()
 
-  if not args.no_pussy:
-    print('Non e` un gioco per pussy, torna quando sarai un uomo')
-    exit(0)
+  # if not args.no_pussy:
+    # print('Non e` un gioco per pussy, torna quando sarai un uomo')
+    # exit(0)
 
   usr = input('Scegli sasso, carta o forbice >>> ')
 
@@ -43,4 +42,4 @@ def main():
     print(winner(usr, pc))
 
 if __name__ == '__main__':
-   main()
+  main()
