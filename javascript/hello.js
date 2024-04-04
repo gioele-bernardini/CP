@@ -2,6 +2,7 @@
 
 console.log('Hello, world!');
 
+
 var myVar;
 console.log(typeof (myVar));
 
@@ -13,3 +14,9 @@ myVar = {key1: 'value1'};
 myVar = null;
 
 myVar = function(n) { return n + 1 };
+
+
+for (let value of ['first', 'second']) {
+  console.log(value)
+}
+[1, 2, 3].forEach( console.log )
