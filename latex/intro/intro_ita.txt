@@ -10,6 +10,17 @@ Cio' che segue e' la nostra risposta.
 
 
 
+
+
+una web application orientata all'ottimizzazione del flusso del lavoro.
+l'app consente di creare piani di lavoro e task per aiutare le aziende nella suddivisione del lavoro.
+Fiore all'cchiello e' il sistema - integrato con moderni modelli di linguaggio - che fornisce report 
+completamente automatici sulla produttivita' del personale, basandosi su appunti e note fornite dai dipendenti stessi in maniera facile e flessibile. 
+
+
+
+
+
 Presentiamo una breve ricapitolazione dei singoli punti presentati
 
 Forze
