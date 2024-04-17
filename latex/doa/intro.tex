@@ -41,6 +41,32 @@ The flagship feature is the system - integrated with modern language models - th
 \pagebreak
 \restoregeometry
 
+We believe that the best way to showcase our project is through the experiences of the end users it's aimed at. Various actors are involved in the software:
+\begin{itemsize}
+  \item Google Authenticator: the system dedicated to user access through Google credentials.
+  \item OpenAI/Google server: the agent responsible for the operation of our flagship feature, namely the automatic creation of reports.
+  \item MongoDB: the DBMS tasked with storing employee notes, tasks, subtasks, etc.
+\end{itemsize}
+Of course, the end users cannot do without these agents. The end users can be divided into three separate subroles, interconnected through a hierarchical relationship regarding system read/write permissions, as we'll explore later on:
+\begin{itemsize}
+  \item Employer
+  \item Manager
+  \item Executor
+\end{itemsize}
+
+Based on that, users might be looking for different goals on our platform:
+\begin{itemize}
+    \item As an \textbf{employee}, I want improved communication and collaboration tools to enhance work efficiency.
+    \item As a \textbf{team member}, I want tasks to be scheduled immediately based on objectives, with immediate acknowledgment from other teams, to reduce time spent in meetings.
+    \item As a \textbf{team member}, I want a system to track tasks and deadlines, to ensure adherence to project timelines.
+    \item As a \textbf{project manager}, I want a mechanism to manage internal project priorities effectively.
+    \item As a \textbf{project manager}, I want the system to be scalable and adaptable to large projects with hundreds of collaborators.
+    \item As a \textbf{project manager}, I want tools to help manage the workload of team members, to eliminate bottlenecks.
+    \item As a \textbf{manager}, I want to receive detailed reports on the work completed, to enhance management effectiveness.
+    \item As a \textbf{manager}, I want tools to evaluate employee efficiency effectively.
+\end{itemize}
+
+
 \section{Domain, Objectives}
 Regarding the application domain, we have chosen Business Productivity for our project. 
 Our decision was influenced by several factors. Certainly, the growing trend of public interest in AI has been a determining factor. The related market opportunities are promising, and B2B has historically always been promising. 
