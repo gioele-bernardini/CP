@@ -1,6 +1,6 @@
 # Numpy e Pandas
 
-# Numpy
+## Numpy
 ## Info generiche
 Numpy e' implementato in **C**, cio' lo rende efficiente
 paragonato ai metodi classici di Python
