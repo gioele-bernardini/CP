@@ -1,14 +1,25 @@
-// Sincrono: prima legge e poi termina (sequenziale!)
 var fs = require('fs');
 var data = fs.readFileSync('file.txt', 'utf-8');
 
+// Le operazioni sono eseguite IN SEQUENZA
 console.log(data);
-console.log('File read :)');
+console.log('Program ended.');
 
 
-// Asincrono: (termina prima, ma poi riceve il callback!)
+// Guardiamo ora la programmazione ASINCRONA
+var fs = require('fs');
 fs.readFile('file.txt', 'utf-8', function(error, data) {
   console.log(data);
 });
+console.log('Program ended.');
 
-console.log('File read once more :)');
+
+// BLOCKING vs NON-BLOCKING (here is blocking!)
+const fs = require('fs');
+const data = fs.readFileSync('/file.md');
+// blocks here above until file is read
+
+const fs = require('fs');
+fs.readFile('/file.md', (err, data) => {
+  if (err) throw err;
+}); // continue executing while waiting for the file
