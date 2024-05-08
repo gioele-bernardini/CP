@@ -9,7 +9,7 @@
 
 .*/
 
-./git_save.sh
+git_save.sh
 
 # git rm -r --cached <file da rimuovere sul git REMOTO>
 # git fetch per aggiornare i dati
