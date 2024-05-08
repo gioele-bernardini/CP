@@ -1,0 +1,14 @@
+*
+!*/
+!*.*
+!*.*
+!*.sh
+!*.bash
+!*.pl
+!*.py
+
+.*/
+
+# git rm -r --cached <file da rimuovere sul git REMOTO>
+# git fetch per aggiornare i dati
+# git switch <branch remota>
