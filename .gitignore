@@ -11,6 +11,11 @@
 
 save.sh
 
+# Per i vari progetti Node!
+node_modules/
+.env
+
 # git rm -r --cached <file da rimuovere sul git REMOTO>
 # git fetch per aggiornare i dati
 # git switch <branch remota>
+
