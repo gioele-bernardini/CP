@@ -18,4 +18,7 @@ from film_category as f1, film_category as f2, category as c
 where f1.film_id <> f2.film_id and f1.category_id = f2.category_id and f1.category_id = c.category_id
 order by c.name;
 
+-- Comedy + Ralph
+
+
 
