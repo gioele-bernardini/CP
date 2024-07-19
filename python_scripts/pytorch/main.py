@@ -88,3 +88,56 @@ class Net(nn.Module):
     x = self.fc3(x)
     return x
 
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.SGD(model.parameters(), lr = 0.01)
+n_epochs = 10
+valid_loss_min = np.Inf
+
+model.train() 
+for data, target in train_loader:
+    optimizer.zero_grad()
+    output = model(data)
+    loss = criterion(output, target)
+    loss.backward()
+    optimizer.step()
+    train_loss += loss.item() * data.size(0)
+
+model.eval() 
+for data, target in valid_loader:
+    output = model(data)
+    loss = criterion(output, target)
+    valid_loss += loss.item() * data.size(0)
+
+train_loss = train_loss / len(train_loader.sampler)
+valid_loss = valid_loss / len(valid_loader.sampler)
+
+print('Epoch: {} \tTraining Loss: {:.6f} \tValidation Loss: {:.6f}'.format(
+    epoch + 1,
+    train_loss,
+    valid_loss
+))
+
+model.eval()
+
+for data, target in test_loader:
+    output = model(data)
+    loss = criterion(output, target)
+    test_loss += loss.item()*data.size(0)
+    _, pred = torch.max(output, 1)
+    correct = np.squeeze(pred.eq(target.data.view_as(pred)))
+
+    for i in range(len(target)):
+        label = target.data[i]
+        class_correct[label] += correct[i].item()
+        class_total[label] += 1# calculate and print avg test loss
+test_loss = test_loss/len(test_loader.sampler)
+print('Test Loss: {:.6f}\n'.format(test_loss))
+
+fig = plt.figure(figsize=(25, 4))
+for i in np.arange(20):
+    ax = fig.add_subplot(2, 20/2, i+1, xticks=[], yticks=[])
+    ax.imshow(np.squeeze(images[i]), cmap='gray')
+    ax.set_title("{} ({})".format(str(preds[i].item()), str(labels[i].item())),
+                color=("green" if preds[i]==labels[i] else "red"))
+
+plt.show()
