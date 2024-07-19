@@ -8,30 +8,30 @@ import matplotlib.pyplot as plt
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader, SubsetRandomSampler
 
-# Define the number of subprocesses to use for data loading,
-# the batch size, and validation size
+# Data loading parameters
 num_workers = 0
 batch_size = 64  # Set a realistic batch size
 valid_size = 0.2  # Set a realistic validation size
 
-# Convert to float tensor
+# Transformations
 transform = transforms.ToTensor()
 
-# Choose the training and test datasets
+# Load datasets
 train_data = datasets.MNIST(
-  root='data',
-  train=True,
-  download=True,
-  transform=transform,
+  root = 'data',
+  train = True,
+  download = True,
+  transform = transform,
 )
 
 test_data = datasets.MNIST(
-  root='data',
-  train=False,
-  download=True,
-  transform=transform,
+  root = 'data',
+  train = False,
+  download = True,
+  transform = transform,
 )
 
+# Data split for validation
 num_train = len(train_data)
 indices = list(range(num_train))
 np.random.shuffle(indices)
@@ -42,6 +42,7 @@ train_idx, valid_idx = indices[split:], indices[:split]
 train_sampler = SubsetRandomSampler(train_idx)
 valid_sampler = SubsetRandomSampler(valid_idx)
 
+# Data loaders
 train_loader = DataLoader(
   train_data,
   batch_size=batch_size,
@@ -62,6 +63,7 @@ test_loader = DataLoader(
   num_workers=num_workers,
 )
 
+# Model definition
 class Net(nn.Module):
   def __init__(self):
     super(Net, self).__init__()
@@ -73,17 +75,15 @@ class Net(nn.Module):
     self.dropout = nn.Dropout(0.5)
 
   def forward(self, x):
-    # flatten image input
+    # Flatten image input
     x = x.view(-1, 28 * 28)
-    # add hidden layer, with relu activation function
+    # Hidden layer 1 with relu and dropout
     x = F.relu(self.fc1(x))
-    # add dropout layer
     x = self.dropout(x)
-    # add hidden layer, with relu activation function
+    # Hidden layer 2 with relu and dropout
     x = F.relu(self.fc2(x))
-    # add dropout layer
     x = self.dropout(x)
-    # add output layer
+    # Output layer
     x = self.fc3(x)
     return x
 
@@ -94,10 +94,12 @@ print(model)
 # Loss function and optimizer
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.SGD(model.parameters(), lr=0.01)
+
+# Number of epochs
 n_epochs = 20
 valid_loss_min = np.Inf
 
-# Training and validation loop
+# --- Training and validation loop starts here ---
 for epoch in range(n_epochs):
   train_loss = 0.0
   valid_loss = 0.0
@@ -125,8 +127,9 @@ for epoch in range(n_epochs):
     train_loss,
     valid_loss
   ))
+# --- Training and validation loop ends here ---
 
-# Testing loop
+# --- Testing loop starts here ---
 test_loss = 0.0
 class_correct = list(0. for i in range(10))
 class_total = list(0. for i in range(10))
@@ -155,8 +158,9 @@ print('Test Loss: {:.6f}'.format(test_loss))
 print('Test Accuracy (Overall): {:.2f}% ({} / {})'.format(
   accuracy, correct_total, len(test_loader.sampler)
 ))
+# --- Testing loop ends here ---
 
-# Visualization of the results
+# --- Visualization of the results starts here ---
 # Obtain one batch of images from the test_loader
 dataiter = iter(test_loader)
 images, labels = next(dataiter)
@@ -179,4 +183,4 @@ for i in np.arange(num_images):
   )
 
 plt.show()
-
+# --- Visualization of the results ends here ---
