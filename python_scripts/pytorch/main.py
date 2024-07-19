@@ -60,11 +60,6 @@ test_loader = DataLoader(
   num_workers=num_workers,
 )
 
-# Obtain one batch of images for training
-dataiter = iter(train_loader)
-images, labels = next(dataiter)  # Correct way to get the next batch
-images = images.numpy()
-
 class Net(nn.Module):
   def __init__(self):
     super(Net, self).__init__()
@@ -160,13 +155,22 @@ print('Test Accuracy (Overall): {:.2f}% ({} / {})'.format(
 ))
 
 # Visualization of the results
+# Obtain one batch of images from the test_loader
+dataiter = iter(test_loader)
+images, labels = next(dataiter)
+images = images.numpy()
+
+output = model(torch.from_numpy(images))
+_, preds = torch.max(output, 1)
+
 fig = plt.figure(figsize=(25, 4))
-# Ensure to use the minimum length between images, labels, and pred
-num_images = min(len(images), len(labels), len(pred), 20)
+# Ensure to use the minimum length between images, labels, and preds
+num_images = min(len(images), len(labels), len(preds), 20)
 for i in np.arange(num_images):
     ax = fig.add_subplot(2, num_images // 2, i + 1, xticks=[], yticks=[])
     ax.imshow(np.squeeze(images[i]), cmap='gray')
-    ax.set_title("{} ({})".format(str(pred[i].item()), str(labels[i].item())),
-                 color=("green" if pred[i] == labels[i] else "red"))
+    ax.set_title("{} ({})".format(str(preds[i].item()), str(labels[i].item())),
+                 color=("green" if preds[i] == labels[i] else "red"))
 
 plt.show()
+
