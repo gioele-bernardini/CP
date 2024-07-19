@@ -94,37 +94,37 @@ print(model)
 # Loss function and optimizer
 criterion = nn.CrossEntropyLoss()
 optimizer = torch.optim.SGD(model.parameters(), lr=0.01)
-n_epochs = 10
+n_epochs = 20
 valid_loss_min = np.Inf
 
 # Training and validation loop
 for epoch in range(n_epochs):
-    train_loss = 0.0
-    valid_loss = 0.0
+  train_loss = 0.0
+  valid_loss = 0.0
 
-    model.train()
-    for data, target in train_loader:
-        optimizer.zero_grad()
-        output = model(data)
-        loss = criterion(output, target)
-        loss.backward()
-        optimizer.step()
-        train_loss += loss.item() * data.size(0)
+  model.train()
+  for data, target in train_loader:
+    optimizer.zero_grad()
+    output = model(data)
+    loss = criterion(output, target)
+    loss.backward()
+    optimizer.step()
+    train_loss += loss.item() * data.size(0)
 
-    model.eval()
-    for data, target in valid_loader:
-        output = model(data)
-        loss = criterion(output, target)
-        valid_loss += loss.item() * data.size(0)
+  model.eval()
+  for data, target in valid_loader:
+    output = model(data)
+    loss = criterion(output, target)
+    valid_loss += loss.item() * data.size(0)
 
-    train_loss = train_loss / len(train_loader.sampler)
-    valid_loss = valid_loss / len(valid_loader.sampler)
+  train_loss = train_loss / len(train_loader.sampler)
+  valid_loss = valid_loss / len(valid_loader.sampler)
 
-    print('Epoch: {} \tTraining Loss: {:.6f} \tValidation Loss: {:.6f}'.format(
-        epoch + 1,
-        train_loss,
-        valid_loss
-    ))
+  print('Epoch: {} \tTraining Loss: {:.6f} \tValidation Loss: {:.6f}'.format(
+    epoch + 1,
+    train_loss,
+    valid_loss
+  ))
 
 # Testing loop
 test_loss = 0.0
@@ -134,18 +134,18 @@ correct_total = 0
 
 model.eval()
 for data, target in test_loader:
-    output = model(data)
-    loss = criterion(output, target)
-    test_loss += loss.item() * data.size(0)
-    _, pred = torch.max(output, 1)
-    correct = pred.eq(target.data.view_as(pred))
+  output = model(data)
+  loss = criterion(output, target)
+  test_loss += loss.item() * data.size(0)
+  _, pred = torch.max(output, 1)
+  correct = pred.eq(target.data.view_as(pred))
 
-    correct_total += correct.sum().item()
+  correct_total += correct.sum().item()
 
-    for i in range(len(target)):
-        label = target.data[i]
-        class_correct[label] += correct[i].item()
-        class_total[label] += 1
+  for i in range(len(target)):
+    label = target.data[i]
+    class_correct[label] += correct[i].item()
+    class_total[label] += 1
 
 # Calculate and print avg test loss
 test_loss = test_loss / len(test_loader.sampler)
@@ -153,7 +153,7 @@ accuracy = 100. * correct_total / len(test_loader.sampler)
 
 print('Test Loss: {:.6f}'.format(test_loss))
 print('Test Accuracy (Overall): {:.2f}% ({} / {})'.format(
-    accuracy, correct_total, len(test_loader.sampler)
+  accuracy, correct_total, len(test_loader.sampler)
 ))
 
 # Visualization of the results
@@ -169,10 +169,14 @@ fig = plt.figure(figsize=(25, 4))
 # Ensure to use the minimum length between images, labels, and preds
 num_images = min(len(images), len(labels), len(preds), 20)
 for i in np.arange(num_images):
-    ax = fig.add_subplot(2, num_images // 2, i + 1, xticks=[], yticks=[])
-    ax.imshow(np.squeeze(images[i]), cmap='gray')
-    ax.set_title("{} ({})".format(str(preds[i].item()), str(labels[i].item())),
-                 color=("green" if preds[i] == labels[i] else "red"))
+  ax = fig.add_subplot(2, num_images // 2, i + 1, xticks=[], yticks=[])
+
+  ax.imshow(np.squeeze(images[i]), cmap='gray')
+  ax.set_title(
+    "{} ({})".format(str(preds[i].item()),
+    str(labels[i].item())),
+    color=("green" if preds[i] == labels[i] else "red")
+  )
 
 plt.show()
 
