@@ -1,4 +1,4 @@
-#! usr/bin/env python3
+#!/usr/bin/env python3
 
 import tensorflow as tf
 from tensorflow.keras import layers, models
@@ -25,7 +25,7 @@ y_test = to_categorical(y_test, 10)
 def build_binary_model():
     model = models.Sequential()
 
-    breakpoint()
+    # breakpoint()
     # First binary convolutional layer
     model.add(
         lq.layers.QuantConv2D(
