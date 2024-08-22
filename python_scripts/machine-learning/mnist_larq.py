@@ -1,4 +1,4 @@
-#!musr/bin/env python3
+#! usr/bin/env python3
 
 import tensorflow as tf
 from tensorflow.keras import layers, models
