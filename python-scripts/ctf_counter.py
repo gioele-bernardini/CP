@@ -17,7 +17,7 @@ def update_counter():
     with open(counter_file, "w") as file:
         file.write(str(count))
     
-    print(f"CTF risolte: {count}")
+    print(f"CTF solved: {count}")
 
 if __name__ == "__main__":
     update_counter()
