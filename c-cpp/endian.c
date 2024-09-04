@@ -1,11 +1,13 @@
 #include <stdio.h>
 
 int main() {
-  unsigned value = 1;
+  unsigned int value = 1;
 
+  // Casting the address of value to a char pointer
   char* pointer = (char*) &value;
 
-  if (pointer) {
+  // Checking the value of the first byte
+  if (*pointer) {
     printf("Little Endian\n");
   } else {
     printf("Big Endian\n");
