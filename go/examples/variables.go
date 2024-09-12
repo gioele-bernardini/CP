@@ -26,6 +26,7 @@ func main() {
 	// Propagation of error + casting
 	x := "5000"
 	y, err := strconv.Atoi(x)
+	// z := strconv.Itoa(y)
 	pl(x, err, reflect.TypeOf(y))
 
 	// Int, float64, bool
