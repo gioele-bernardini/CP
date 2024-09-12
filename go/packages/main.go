@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
-	"packages/mathutils"
+	"packages/utils"
 )
 
 func main() {
-	result := mathutils.Add(3, 4)
-
+	result := utils.Add(3, 4)
 	fmt.Println("Result: ", result)
+
+	utils.Quote()
 }

@@ -1,4 +1,4 @@
-package mathutils
+package utils
 
 // Exported: Can be used in other packages
 func Add(a, b int) int {
