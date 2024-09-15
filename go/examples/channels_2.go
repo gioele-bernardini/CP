@@ -6,63 +6,63 @@ import (
 	"time"
 )
 
-// Funzione che simula un sensore che invia letture periodicamente
+// Function simulating a sensor that sends periodic readings
 func sensor(sensorID int, ch chan int) {
 	for {
-		// Simula una lettura del sensore
+		// Simulate a sensor reading
 		reading := rand.Intn(100)
-		fmt.Printf("Sensore %d invia lettura: %d\n", sensorID, reading)
-		ch <- reading                                         // Invio della lettura sul canale
-		time.Sleep(time.Duration(rand.Intn(2)) * time.Second) // Simuliamo un ritardo
+		fmt.Printf("Sensor %d sends reading: %d\n", sensorID, reading)
+		ch <- reading                                         // Send the reading to the channel
+		time.Sleep(time.Duration(rand.Intn(2)) * time.Second) // Simulate delay
 	}
 }
 
-// Funzione gestore che raccoglie e processa le letture da più sensori
+// Manager function that collects and processes readings from multiple sensors
 func manager(ch1, ch2, ch3 chan int, done chan bool) {
 	count := 0
 	for {
 		select {
 		case reading := <-ch1:
-			fmt.Printf("Gestore ha ricevuto dal sensore 1: %d\n", reading)
+			fmt.Printf("Manager received from sensor 1: %d\n", reading)
 		case reading := <-ch2:
-			fmt.Printf("Gestore ha ricevuto dal sensore 2: %d\n", reading)
+			fmt.Printf("Manager received from sensor 2: %d\n", reading)
 		case reading := <-ch3:
-			fmt.Printf("Gestore ha ricevuto dal sensore 3: %d\n", reading)
+			fmt.Printf("Manager received from sensor 3: %d\n", reading)
 		}
 
 		count++
-		if count >= 10 { // Dopo aver processato 10 letture, il gestore si ferma
-			fmt.Println("Gestore ha ricevuto abbastanza letture, terminazione.")
-			done <- true // Segnala che il gestore ha terminato
+		if count >= 10 { // After processing 10 readings, stop the manager
+			fmt.Println("Manager has received enough readings, terminating.")
+			done <- true // Signal that the manager is done
 			return
 		}
 	}
 }
 
 func main() {
-	// Creazione di canali bufferizzati per i sensori
+	// Create buffered channels for sensors
 	ch1 := make(chan int, 5)
 	ch2 := make(chan int, 5)
 	ch3 := make(chan int, 5)
 
-	done := make(chan bool) // Canale per segnalare la terminazione del gestore
+	done := make(chan bool) // Channel to signal manager termination
 
-	// Avvia tre goroutine per simulare i sensori
+	// Start three goroutines simulating the sensors
 	go sensor(1, ch1)
 	go sensor(2, ch2)
 	go sensor(3, ch3)
 
-	// Avvia il gestore in una goroutine
+	// Start the manager in a goroutine
 	go manager(ch1, ch2, ch3, done)
 
-	// Aspetta che il gestore termini
+	// Wait for the manager to finish
 	<-done
 
-	// Chiudiamo i canali (in questo caso non è strettamente necessario poiché il programma termina, ma è una buona pratica)
+	// Close the channels (not strictly necessary here since the program will exit, but good practice)
 	close(ch1)
 	close(ch2)
 	close(ch3)
 	close(done)
 
-	fmt.Println("Programma terminato.")
+	fmt.Println("Program terminated.")
 }
