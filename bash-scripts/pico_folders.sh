@@ -15,4 +15,3 @@ done
 
 echo "Folder structure correctly set up"
 
-
