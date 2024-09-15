@@ -1,7 +1,3 @@
-Ecco una versione migliorata del tuo README:
-
----
-
 # My Journey
 
 **A repository containing all the materials I am using to learn.**
