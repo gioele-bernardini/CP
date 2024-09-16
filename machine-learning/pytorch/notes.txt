@@ -1,0 +1,4 @@
+// random tensors
+why random tensors are important because the way
+many neural networks work..
+
