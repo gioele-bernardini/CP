@@ -20,9 +20,9 @@ func errorCheck(err error) {
 	}
 }
 
-func write(writer http.ResponseWriter, mst string) {
+func write(writer http.ResponseWriter, msg string) {
 	_, err := writer.Write([]byte(msg))
-	errorCheck()
+	errorCheck(err) // Pass the error to the errorCheck function
 }
 
 func getStrings(fileName string) []string {
@@ -48,7 +48,7 @@ func englishHandler(writer http.ResponseWriter, request *http.Request) {
 	write(writer, "Hello, Internet!")
 }
 
-func SpanishHandler(writer http.ResponseWriter, request *http.Request) {
+func spanishHandler(writer http.ResponseWriter, request *http.Request) {
 	write(writer, "Hola, Internet!")
 }
 
@@ -63,10 +63,36 @@ func interactHandler(writer http.ResponseWriter, request *http.Request) {
 		ToDos:     todoVals,
 	}
 	err = tmpl.Execute(writer, todos)
+	errorCheck(err) // Check error here as well
 }
 
 func newHandler(writer http.ResponseWriter, request *http.Request) {
 	tmpl, err := template.ParseFiles("new.html")
 	errorCheck(err)
 	err = tmpl.Execute(writer, nil)
+	errorCheck(err) // Check error here as well
+}
+
+func createHandler(writer http.ResponseWriter, request *http.Request) {
+	todo := request.FormValue("todo")
+	options := os.O_WRONLY | os.O_APPEND | os.O_CREATE
+	file, err := os.OpenFile("todo.txt", options, os.FileMode(0600))
+	errorCheck(err)
+
+	_, err = fmt.Fprintln(file, todo)
+	errorCheck(err) // Pass the error to the errorCheck function
+	err = file.Close()
+	errorCheck(err)
+	http.Redirect(writer, request, "/interact", http.StatusFound)
+}
+
+func main() {
+	http.HandleFunc("/hello", englishHandler)
+	http.HandleFunc("/hola", spanishHandler)
+	http.HandleFunc("/interact", interactHandler)
+	http.HandleFunc("/new", newHandler)
+	http.HandleFunc("/create", createHandler)
+
+	err := http.ListenAndServe("localhost:8080", nil)
+	log.Fatal(err)
 }
