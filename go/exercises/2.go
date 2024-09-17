@@ -9,25 +9,4 @@
 // Hints:
 // In case of input data being supplied to the question, it should be assumed to be a console input.
 
-package main
 
-import "fmt"
-
-func factorial(number int) int {
-	if number == 0 || number == 1 {
-		return 1
-	}
-
-	return number * factorial(number-1)
-}
-
-func main() {
-	// var target int
-	// fmt.Print("Please insert a number : ")
-	// fmt.Scan(&target)
-
-	target := 6
-	var result = factorial(target)
-
-	fmt.Printf("Output : %d\n", result)
-}
