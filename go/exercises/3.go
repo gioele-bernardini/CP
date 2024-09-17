@@ -9,4 +9,26 @@
 // In case of input data being supplied to the question, it should be assumed to be a console input.
 // Consider use dict()
 
+package main
 
+import "fmt"
+
+func generateDictionary(n int) map[int]int {
+	result := make(map[int]int)
+
+	for i := 1; i <= n; i++ {
+		result[i] = i * i
+	}
+
+	return result
+}
+
+func main() {
+	var n int
+
+	fmt.Print("Please insert a number > ")
+	fmt.Scan(&n)
+
+	result := generateDictionary(n)
+	fmt.Println("Output :", result)
+}
