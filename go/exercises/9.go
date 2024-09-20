@@ -7,16 +7,4 @@
 // HELLO WORLD
 // PRACTICE MAKES PERFECT
 
-package main
 
-import (
-	"fmt"
-	"strings"
-)
-
-func main() {
-	input := "Ciao, Mondo!"
-	input = strings.ToUpper(input)
-
-	fmt.Println("Output :", input)
-}

@@ -8,28 +8,4 @@
 // Hints:
 // In case of input data being supplied to the question, it should be assumed to be a console input.
 
-package main
 
-import (
-	"fmt"
-	"strings"
-)
-
-func SortAndPrint(input string) {
-	list := strings.Split(input, ",")
-
-	var result []string
-
-	for index := range len(list) {
-
-	}
-
-}
-
-func main() {
-	var input string
-
-	fmt.Println("Please insert a comma separated sequence of words > ")
-	fmt.Scanln(&input)
-
-}

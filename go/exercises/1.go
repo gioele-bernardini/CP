@@ -5,23 +5,4 @@
 // Hints:
 // Consider use range(#begin, #end) method
 
-package main
 
-import "fmt"
-
-func findNumbers() []int {
-	var out []int
-
-	for i := 2000; i <= 3200; i++ {
-		if i%7 == 0 && i%5 != 0 {
-			out = append(out, i)
-		}
-	}
-
-	return out
-}
-
-func main() {
-	result := findNumbers()
-	fmt.Println("Output :", result)
-}
