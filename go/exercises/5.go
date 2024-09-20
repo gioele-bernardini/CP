@@ -7,4 +7,27 @@
 // Hints:
 // Use __init__ method to construct some parameters
 
+package main
 
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strings"
+)
+
+func printToUpper(input string) {
+	fmt.Println("Output :", strings.ToUpper(input))
+}
+
+func main() {
+	// Read whole line until the first newline character
+	reader := bufio.NewReader(os.Stdin)
+
+	fmt.Print("Please insert a string > ")
+
+	input, _ := reader.ReadString('\n')
+	input = strings.TrimSpace(input)
+
+	printToUpper(input)
+}
