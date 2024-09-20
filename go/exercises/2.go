@@ -9,4 +9,21 @@
 // Hints:
 // In case of input data being supplied to the question, it should be assumed to be a console input.
 
+package main
 
+import "fmt"
+
+func factorial(n int) int {
+	if n == 0 || n == 1 {
+		return 1
+	}
+
+	return n * factorial(n-1)
+}
+
+func main() {
+	n := 10
+	result := factorial(n)
+
+	fmt.Println("Output :", result)
+}
