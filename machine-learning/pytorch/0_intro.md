@@ -9,7 +9,7 @@ import torch
 
 // tensor
 [3, 224, 224]
-which could mean [colur_channel, heihgt, width]
+which could mean [colur_channel, height, width]
 tensore di rango 3 questo sarebbe!
 
 // Scalar
@@ -19,7 +19,6 @@ scalar.item() ritorna il valore
 
 posso immaginare il tensore come una classe con attributi
 ndim, e item() e i vari metodi :)
-
 
 ## Gestione del random
 
