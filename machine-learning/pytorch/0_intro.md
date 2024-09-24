@@ -36,3 +36,7 @@ tensor * 10
 tensor - 10
 element-wise moltiplication [1*1, 2*2, 3*3] = [1, 4, 9]
 matrix-moltipliation [1*1 + 2*2 + 3*3] = [14]
+
+poi viene ricordato la differenza tra vram e ram in
+termini di immagazzinamento delle variabili dei tensori
+// numpy conversion
