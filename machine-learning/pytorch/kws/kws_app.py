@@ -8,10 +8,11 @@ import sounddevice as sd
 from scipy.fft import fft
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
+import scipy.io.wavfile as wavfile
 
 # Parametri audio
 SAMPLE_RATE = 16000  # Frequenza di campionamento
-DURATION = 1  # Durata della registrazione in secondi
+DURATION = 2  # Durata della registrazione in secondi (aumentata per il test)
 MAX_AUDIO_LENGTH = SAMPLE_RATE * DURATION  # Lunghezza massima in campioni
 
 # Definizione del modello MLP
@@ -40,12 +41,15 @@ def record_audio(duration, sample_rate):
     return audio.flatten()
 
 # Funzione per rilevare se l'audio contiene voce
-def detect_voice(audio, threshold=0.01):
+def detect_voice(audio, threshold=0.001):  # Soglia ridotta
     energy = np.sum(audio ** 2) / len(audio)
+    print(f"Energy of audio: {energy}")
     return energy > threshold
 
 # Funzione per pre-elaborare l'audio
 def preprocess_audio(audio):
+    # Salva l'audio per il debug
+    wavfile.write('test_audio.wav', SAMPLE_RATE, audio)
     # Padding o troncamento
     if len(audio) < MAX_AUDIO_LENGTH:
         pad_length = MAX_AUDIO_LENGTH - len(audio)
@@ -55,7 +59,10 @@ def preprocess_audio(audio):
     # Trasformata di Fourier
     fft_audio = np.abs(fft(audio))
     # Normalizzazione
-    fft_audio = fft_audio / np.max(fft_audio)
+    if np.max(fft_audio) > 0:
+        fft_audio = fft_audio / np.max(fft_audio)
+    else:
+        fft_audio = fft_audio
     return fft_audio[:len(fft_audio)//2]  # Prendiamo solo la metà positiva dello spettro
 
 class KWSApp:
