@@ -1,40 +1,66 @@
-#include <ncurses.h> // Library for ncurses functions
+#include <ncurses.h> // Libreria per le funzioni ncurses
 #include <stdio.h>
 #include <string.h>
 
+#define TARGET "ciao"
+#define TARGET_LEN 4
+
 int main() {
-  char buffer[5] = {0}; // Buffer to store the input
-  int index = 0;
+    char buffer[TARGET_LEN + 1] = {0}; // Buffer per memorizzare l'input, incluso il terminatore nullo
+    int index = 0;
 
-  // Initialize ncurses
-  initscr(); // Start curses mode
-  cbreak();  // Disable line buffering, pass every character
-  noecho();  // Don't echo characters on screen
+    // Inizializza ncurses
+    initscr();          // Avvia la modalità curses
+    cbreak();           // Disabilita il buffering della linea, passa ogni carattere
+    noecho();           // Non visualizza i caratteri digitati
+    keypad(stdscr, TRUE); // Abilita l'input di tasti speciali
 
-  printw("Type 'ciao' for an immediate response:\n");
-  refresh();
+    printw("Digita 'ciao' per una risposta immediata:\n");
+    refresh();
 
-  while (1) {
-    char c = getch(); // Get a single character input without waiting for Enter
-    printw("%c", c);  // Print the character to the screen
-    buffer[index++] = c;
+    while (1) {
+        int ch = getch();  // Ottiene un singolo carattere senza attendere l'Invio
 
-    // If the user typed "ciao"
-    if (index == 4 && strncmp(buffer, "ciao", 4) == 0) {
-      printw("\nYou typed 'ciao'! Greetings!\n");
-      break;
+        // Gestione dell'input speciale (es. tasti freccia)
+        if (ch == KEY_RESIZE) {
+            // Puoi gestire il ridimensionamento del terminale qui se necessario
+            continue;
+        }
+
+        // Ignora input non stampabili
+        if (ch == ERR || ch < 32 || ch > 126) {
+            continue;
+        }
+
+        char c = (char)ch;
+        printw("%c", c);   // Stampa il carattere sullo schermo
+        refresh();         // Aggiorna lo schermo
+
+        // Aggiungi il carattere al buffer
+        buffer[index] = c;
+        index = (index + 1) % TARGET_LEN;
+        buffer[TARGET_LEN] = '\0'; // Assicura la terminazione nulla
+
+        // Costruisci la stringa corrente dal buffer
+        char temp[TARGET_LEN + 1] = {0};
+        for (int i = 0; i < TARGET_LEN; i++) {
+            temp[i] = buffer[(index + i) % TARGET_LEN];
+        }
+
+        // Confronta la stringa corrente con "ciao"
+        if (strcmp(temp, TARGET) == 0) {
+            printw("\nHai digitato 'ciao'! Saluti!\n");
+            refresh(); // Assicura che il messaggio sia visualizzato
+
+            // Attende una pressione di tasto prima di uscire
+            printw("Premi un tasto qualsiasi per uscire.\n");
+            refresh();
+            getch(); // Attende l'input dell'utente
+            break;
+        }
     }
 
-    // Reset the buffer if more than 4 characters are entered
-    if (index == 4) {
-      index = 0;
-    }
-
-    refresh(); // Refresh the screen to update the output
-  }
-
-  // End ncurses mode
-  endwin();
-  return 0;
+    // Termina la modalità ncurses
+    endwin();
+    return 0;
 }
-
