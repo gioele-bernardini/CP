@@ -21,3 +21,26 @@ begin
   FA3: FullAdder port map (A(3), B(3), C(3), cout, S(3));
 end architecture structural;
 
+
+-- Test
+entity TestAdder4 is
+end entity;
+
+architecture equations of TestAdder4 is
+  signal A, B, S : bit_vector (3 downto 0);
+  signal cin, cout : bit;
+begin
+  -- Device Under Test (dut)
+  dut: entity work.Adder4(esplicita) port map(
+    A => A, B => B,
+    S => S,
+    cin => cin,
+    cout => cout
+  );
+
+  -- Definizione degli stimoli
+  A <= "0000", "0010" after 100 ns, "1110" after 200 ns, "0110" after 300 ns;
+  B <= "0000", "1010" after 50 ns, "1110" after 200 ns, "0110" after 300 ns;
+  B <= "0000", "1010" after 50 ns, "0011" after 150 ns, "1100" after 250 ns;
+end architecture;
+
