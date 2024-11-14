@@ -19,7 +19,8 @@ architecture simple of TestAnd2 is
   -- Intuitivamente, i *fili* a cui collegare il blocco di calcolo (la nostra AND in questo caso!)
   signal a, b, c : bit;
 begin
-  -- Istanza del modulo da testare
+  -- Istanza del modulo da testare (istanziazione)
+  -- g1 (gate 1)
   g1: And2 port map (x => a, y => b, z => c);
   -- Definizione degli stimoli
   a <= '0', '1' after 100 ns, '0' after 200 ns;
