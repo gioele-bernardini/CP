@@ -1,4 +1,5 @@
 -- Generatore di clock a 100 MHz
+
 entity ClockGenerator is
   port (clkn : buffer bit);
 end ClockGenerator;

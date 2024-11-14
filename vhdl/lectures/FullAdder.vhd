@@ -1,3 +1,5 @@
+-- Generico full-adder
+
 entity FullAdder is
   port (a, b, cin : in bit;
         s, cout : out bit);
