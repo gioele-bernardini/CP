@@ -41,6 +41,6 @@ begin
   -- Definizione degli stimoli
   A <= "0000", "0010" after 100 ns, "1110" after 200 ns, "0110" after 300 ns;
   B <= "0000", "1010" after 50 ns, "1110" after 200 ns, "0110" after 300 ns;
-  B <= "0000", "1010" after 50 ns, "0011" after 150 ns, "1100" after 250 ns;
+  S <= "0000", "1010" after 50 ns, "0011" after 150 ns, "1100" after 250 ns;
 end architecture;
 
