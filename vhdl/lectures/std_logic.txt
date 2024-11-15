@@ -1,4 +1,4 @@
-std_logic e' un tipo non nativo, al contrario di bit.
+std_logic e' un tipo *non* nativo, al contrario di bit.
 
 si puo' trovare nella libreria standard 1164 della IEEE
 e' una tipologia non numerica che usa 9 valori
@@ -14,3 +14,15 @@ e' una tipologia non numerica che usa 9 valori
 - -
 
 operatore ternario per le assegnazioni
+
+PROCESSI
+sensitivity list
+occhio all'approccio sequenziale ma 'bufferizzato'!
+
+n.b.
+altrimenti, negli altri paradigmi, tutto viene fatto contemporaneamente!
+
+c'e' un'eccezione!
+all'interno del processo le *variabili* vengono aggiornate immediatamente!
+al contrario degli elementi presenti nella sensitivity list!
+
