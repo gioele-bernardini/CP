@@ -1,0 +1,16 @@
+std_logic e' un tipo non nativo, al contrario di bit.
+
+si puo' trovare nella libreria standard 1164 della IEEE
+e' una tipologia non numerica che usa 9 valori
+
+- U
+- X
+- 0
+- 1
+- Z
+- W
+- L
+- H
+- -
+
+operatore ternario per le assegnazioni
